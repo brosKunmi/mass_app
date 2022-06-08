@@ -26,6 +26,7 @@ class VideosTileRow extends StatelessWidget {
               state.videos.where((v) => v.recommended == recon).toList();
 
           String _title = recon ? 'Must Watch' : 'Trending';
+          if (_recV.isEmpty) return Container();
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -50,7 +51,7 @@ class VideosTileRow extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 200,
+                height: 208,
                 child: MediaQuery.removePadding(
                   context: context,
                   removeBottom: true,

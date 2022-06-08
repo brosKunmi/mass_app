@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mass_app/utilities/colors%20and%20doubles/colors.dart';
@@ -51,13 +53,15 @@ class SupportButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       child: Text(
-        'DONATE',
+        Platform.isIOS ? 'Donate On the Website' : 'DONATE',
         style: GoogleFonts.montserrat(
           color: Colors.white,
         ),
       ),
       style: ElevatedButton.styleFrom(
-        fixedSize: const Size(100, 40),
+        fixedSize: Platform.isIOS
+            ? Size(MediaQuery.of(context).size.width * 0.8, 50)
+            : const Size(100, 40),
         primary: const Color(0xff1B1869),
         padding: const EdgeInsets.all(4.0),
         shape: RoundedRectangleBorder(

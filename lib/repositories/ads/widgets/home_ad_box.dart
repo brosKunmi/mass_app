@@ -15,7 +15,8 @@ class HomeAdBox extends StatelessWidget {
         builder: (context, state) {
           return state.bannerAd != null
               ? Container(
-                  margin: const EdgeInsets.all(4.0),
+                  margin: const EdgeInsets.symmetric(
+                      horizontal: 4.0, vertical: 8.0),
                   height: 64,
                   child: AdWidget(ad: state.bannerAd!),
                 )

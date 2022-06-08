@@ -17,7 +17,7 @@ class LiveVideoTile extends StatelessWidget {
         } else if (state.status == LiveStatus.noLive) {
           return const Center(child: NoLiveTile());
         } else if (state.status == LiveStatus.error) {
-          return const Text('Something went wrong');
+          return const Center(child: NoLiveTile());
         } else if (state.status == LiveStatus.loading) {
           return const LiveLoadingSpin();
         }

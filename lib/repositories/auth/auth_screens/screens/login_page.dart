@@ -72,7 +72,7 @@ class LoginPage extends StatelessWidget {
                           AuthPasswordField(
                             label: 'Password:',
                             onSubmitted: (v) {
-                              _password = v!;
+                              _password = v!.trim();
                             },
                           ),
                         ],

@@ -5,6 +5,7 @@ import 'package:mass_app/repositories/tv/tv_widgets/screens/videos_list.screen.d
 
 import 'package:mass_app/repositories/tv/videos_repo/models/video_category.dart';
 import 'package:mass_app/repositories/tv/videos_repo/models/video_model.dart';
+import 'package:mass_app/utilities/colors%20and%20doubles/colors.dart';
 import 'package:mass_app/utilities/colors%20and%20doubles/doubles.dart';
 import 'package:mass_app/utilities/extensions/string_extentions.dart';
 
@@ -31,13 +32,14 @@ class CategoryTile extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 6.0),
         //  height: 130,
-        width: 120,
+        width: 150,
         decoration: BoxDecoration(
-          boxShadow: kElevationToShadow[6],
+          boxShadow: kElevationToShadow[2],
           color: Colors.white,
           borderRadius: buttonBR,
         ),
         child: Stack(
+          alignment: Alignment.bottomRight,
           children: [
             ClipRRect(
               borderRadius: buttonBR,
@@ -47,11 +49,14 @@ class CategoryTile extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: cat.catTitle.vidText,
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: buttonBR,
+                color: primaryColor.withOpacity(0.7),
               ),
+              margin: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
+              child: cat.catTitle.vidText,
             ),
           ],
         ),

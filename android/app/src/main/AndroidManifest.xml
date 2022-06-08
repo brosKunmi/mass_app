@@ -2,7 +2,7 @@
     package="com.masstech.mass_app">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="mass_app"
+        android:label="MASS Movement"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
@@ -40,7 +40,10 @@
             android:value="2" />
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-5691734813783438~5335704113"/>
+            android:value="ca-app-pub-8610198729598420~3861839295"/>
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="mass_notification_channel" />
     </application>
     <queries>        
         <intent>

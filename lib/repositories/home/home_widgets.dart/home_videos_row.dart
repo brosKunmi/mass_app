@@ -13,63 +13,63 @@ class HomeVidRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _laterDate = DateTime.now().subtract(const Duration(days: 30));
-
     return BlocBuilder<AllVideosBloc, AllVideosState>(
       builder: (context, state) {
         if (state.status == AllVideosStatus.success) {
-          List<Video> _recV = state.videos
-              .where((v) => v.dateUploaded.toDate().isAfter(_laterDate))
-              .toList();
+          List<Video> _recV = state.videos.sublist(0, 4);
 
           String _title = 'Latest on MASS TV';
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 4),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    _title.bigBold,
-                    const Spacer(),
-                    MassTextButton(
-                        text: 'See more',
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (c) =>
-                                  VideosListScreen(vids: _recV, title: _title),
-                            ),
-                          );
-                        })
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 200,
-                child: MediaQuery.removePadding(
-                  context: context,
-                  removeBottom: true,
-                  removeTop: true,
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    clipBehavior: Clip.none,
-                    padding: const EdgeInsets.all(0),
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return VideoTile(
-                        key: ValueKey(_recV[index].videoLink),
-                        video: _recV[index],
-                      );
-                    },
-                    itemCount: _recV.length,
-                    separatorBuilder: (_, index) => const SizedBox(width: 2),
+          if (_recV.isEmpty) {
+            return Container();
+          } else {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      _title.bigBold,
+                      const Spacer(),
+                      MassTextButton(
+                          text: 'See more',
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (c) => VideosListScreen(
+                                    vids: _recV, title: _title),
+                              ),
+                            );
+                          })
+                    ],
                   ),
                 ),
-              ),
-            ],
-          );
+                SizedBox(
+                  height: 208,
+                  child: MediaQuery.removePadding(
+                    context: context,
+                    removeBottom: true,
+                    removeTop: true,
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      clipBehavior: Clip.none,
+                      padding: const EdgeInsets.all(0),
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return VideoTile(
+                          key: ValueKey(_recV[index].videoLink),
+                          video: _recV[index],
+                        );
+                      },
+                      itemCount: _recV.length,
+                      separatorBuilder: (_, index) => const SizedBox(width: 2),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          }
         } else if (state.status == AllVideosStatus.loading) {
           return shimshim('Loading Videos');
         }

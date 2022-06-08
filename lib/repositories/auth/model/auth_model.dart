@@ -6,7 +6,7 @@ import 'package:mass_app/utilities/extensions/utility_strings.dart';
 class Massian {
   final String name;
   final String id;
-  final String phoneNumber;
+  String phoneNumber;
   final String email;
   bool volunteer;
   bool disciple;
@@ -20,8 +20,8 @@ class Massian {
   Massian({
     required this.name,
     required this.id,
-    required this.phoneNumber,
     required this.email,
+    this.phoneNumber = '',
     this.volunteer = false,
     this.disciple = false,
     this.state = '',

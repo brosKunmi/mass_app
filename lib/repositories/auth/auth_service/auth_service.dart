@@ -22,14 +22,18 @@ class AuthService {
   }
 
   Future<String> registerUser(String email, String password, String username,
-      String phoneNumber) async {
+      String? phoneNumber) async {
     var _userCre = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email, password: password);
 
     String _userId = _userCre.user!.uid;
 
     Massian _user = Massian(
-        name: username, id: _userId, phoneNumber: phoneNumber, email: email);
+      name: username,
+      id: _userId,
+      phoneNumber: phoneNumber ?? '',
+      email: email,
+    );
 
     await _firestore.collection('users').doc(_userId).set(_user.toMap());
 
@@ -61,6 +65,21 @@ class AuthService {
     await massian.set({'volunteer': true}, SetOptions(merge: true));
 
     return Massian.fromMap(await massian.get());
+  }
+
+  Future<Massian> beMember(String userId) async {
+    var _usersnap = await _firestore.collection('users').doc(userId).get();
+
+    Massian _massian = Massian.fromMap(_usersnap);
+
+    await _firestore.collection('mem_register').doc(userId).set({
+      'userId': _massian.id,
+      'name': _massian.name,
+      'phoneNo': _massian.phoneNumber,
+      'email': _massian.email
+    });
+
+    return _massian;
   }
 
   Future<Massian> becomeDisc(String userId) async {

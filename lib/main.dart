@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -12,6 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   MobileAds.instance.initialize();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(const MyApp());
 }
 
@@ -32,6 +34,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             primaryColor: const Color(0xff1B1869),
+            visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
           home: const HomeCheck(),
           routes: {
@@ -42,3 +45,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {}

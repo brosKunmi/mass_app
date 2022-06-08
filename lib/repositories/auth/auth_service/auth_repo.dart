@@ -10,7 +10,7 @@ class AuthUserRepo {
       await authService.signInUser(email, password);
 
   Future<String> registerUser(String email, String password, String username,
-          String phoneNumber) async =>
+          String? phoneNumber) async =>
       await authService.registerUser(email, password, username, phoneNumber);
 
   Future<Massian> getUser(String userId) async =>
@@ -27,6 +27,10 @@ class AuthUserRepo {
 
   Future<Massian> beVol(String userId) async =>
       await authService.becomeV(userId);
+
+  Future<Massian> beMem(String userId) async =>
+      await authService.beMember(userId);
+
   Future<Massian> beDisc(String userId) async =>
       await authService.becomeDisc(userId);
 

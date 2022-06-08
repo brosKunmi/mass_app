@@ -20,7 +20,8 @@ class ArticleCat extends StatelessWidget {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (c) => ArticleListScreen(
                   articles: catArt,
-                  cat: cart,
+                  title: cart.catTitle,
+                  desc: cart.catDesc,
                 )));
       },
       child: Container(

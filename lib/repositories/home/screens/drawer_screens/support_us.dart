@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
@@ -7,6 +9,7 @@ import 'package:mass_app/utilities/colors%20and%20doubles/doubles.dart';
 import 'package:mass_app/utilities/extensions/string_extentions.dart';
 import 'package:mass_app/utilities/extensions/utility_strings.dart';
 import 'package:mass_app/utilities/widgets/utility_widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SupportUsPage extends StatefulWidget {
   const SupportUsPage({Key? key}) : super(key: key);
@@ -98,72 +101,86 @@ class _SupportUsPageState extends State<SupportUsPage> {
         child: Column(
           children: [
             Container(
-              height: _tHeight * 0.4,
+              height: Platform.isIOS ? _tHeight * 0.5 : _tHeight * 0.4,
               width: double.infinity,
               margin: const EdgeInsets.all(4.0),
               decoration: BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage('donate2'.png),
-                  ),
-                  borderRadius: buttonBR,
-                  boxShadow: kBoxShadow),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: 'Or'.bigBold,
-            ),
-            Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  SupportTextField(
-                    hint: 'JOe',
-                    inputType: TextInputType.name,
-                    onSubmitted: (s) {
-                      setState(() {
-                        _name = s!;
-                      });
-                    },
-                  ),
-                  SupportTextField(
-                    hint: 'Joe@gmail.com',
-                    inputType: TextInputType.emailAddress,
-                    onSubmitted: (s) {
-                      setState(() {
-                        _email = s!;
-                      });
-                    },
-                  ),
-                  SupportTextField(
-                    hint: '+23423456789',
-                    inputType: TextInputType.number,
-                    onSubmitted: (s) {
-                      setState(() {
-                        _number = s!;
-                      });
-                    },
-                  ),
-                  SupportTextField(
-                    hint: '#20000',
-                    inputType: TextInputType.number,
-                    onSubmitted: (s) {
-                      setState(() {
-                        _amount = s!;
-                      });
-                    },
-                  ),
-                ],
+                image: DecorationImage(
+                  fit: BoxFit.contain,
+                  image: AssetImage('donate2'.png),
+                ),
+                borderRadius: buttonBR,
               ),
             ),
-            const SizedBox(height: 16),
-            _isLoading
-                ? Center(child: loader)
-                : SupportButton(onPressed: () => payOut()),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: 'Or'.bigBold,
+            ),
+            Platform.isIOS
+                ? SupportButton(onPressed: () {
+                    _launchURL();
+                  })
+                : Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        SupportTextField(
+                          hint: 'JOe',
+                          inputType: TextInputType.name,
+                          onSubmitted: (s) {
+                            setState(() {
+                              _name = s!;
+                            });
+                          },
+                        ),
+                        SupportTextField(
+                          hint: 'Massian@gmail.com',
+                          inputType: TextInputType.emailAddress,
+                          onSubmitted: (s) {
+                            setState(() {
+                              _email = s!;
+                            });
+                          },
+                        ),
+                        SupportTextField(
+                          hint: '+2348123456789',
+                          inputType: TextInputType.number,
+                          onSubmitted: (s) {
+                            setState(() {
+                              _number = s!;
+                            });
+                          },
+                        ),
+                        SupportTextField(
+                          hint: '#20000',
+                          inputType: TextInputType.number,
+                          onSubmitted: (s) {
+                            setState(() {
+                              _amount = s!;
+                            });
+                          },
+                        ),
+                        const SizedBox(height: 16),
+                        _isLoading
+                            ? Center(child: loader)
+                            : SupportButton(onPressed: () => payOut()),
+                      ],
+                    ),
+                  ),
           ],
         ),
       ),
     );
+  }
+
+  _launchURL() async {
+    const _url = 'https://www.masscitytour.com.ng/donate';
+
+    if (await canLaunch(_url)) {
+      await launch(_url, enableJavaScript: true);
+    } else {
+      throw 'Could not launch $_url';
+    }
   }
 
   String? _getReference(String ref) {

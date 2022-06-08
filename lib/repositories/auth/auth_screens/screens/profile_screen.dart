@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mass_app/repositories/ads/widgets/home_ad_box.dart';
+import 'package:mass_app/repositories/auth/auth_screens/screens/become_member.dart';
 import 'package:mass_app/repositories/auth/auth_screens/screens/edit_profile_screen.dart';
 import 'package:mass_app/repositories/auth/auth_screens/screens/become_disciple.dart';
 import 'package:mass_app/repositories/auth/auth_screens/screens/become_volunteer.dart';
@@ -106,6 +107,21 @@ class ProfilePage extends StatelessWidget {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (_) => BecomeDiscipleScreen(
+                            massian: _massian,
+                          ),
+                        ),
+                      );
+                    }),
+                const Divider(
+                  thickness: 0.8,
+                ),
+                ProfileTextButtons(
+                    faIcon: FontAwesomeIcons.userFriends,
+                    title: 'Become a Member',
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => BecomeMemberScreen(
                             massian: _massian,
                           ),
                         ),

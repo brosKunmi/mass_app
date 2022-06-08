@@ -74,7 +74,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                           keyboardType: TextInputType.text,
                           label: 'Email Address:',
                           onSubmitted: (p0) {
-                            _email = p0!;
+                            _email = p0!.trim();
                           },
                         ),
                       ),

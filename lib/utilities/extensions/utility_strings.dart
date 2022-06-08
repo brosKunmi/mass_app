@@ -9,6 +9,8 @@ class UtilityStrings {
       'pk_test_ba93a9babf9ebb15dad6fd3fd266fd7e17d92cd2';
 
   static String aboutUs = '''
+The MASS MOVEMENT is an Interdenominational Christian Youth Organization in South West Nigeria. It is registered under Nigerian laws as MASS GLOBAL IMPACT FOUNDATION (CAC/IT/NO: 151694).
+
 Mass was founded by TOLUWASE TOLULOPE (TOLUCCI) -  a creative Enterpreneur, Psalmist/Ministrel, Exbanker, Evangelist and kingdom influencer.
 
 MASS deploys music, worship and other forms of creative arts as vehicles to promote National Transformation based on Godly values among the millenials, genZ's and gen alpha's.
@@ -16,13 +18,14 @@ MASS deploys music, worship and other forms of creative arts as vehicles to prom
 We have organized stadium sized outreaches in different cities of South West Nigeria and convened a cumulative of 300,000 youths in different outreaches.
 
 ${String.fromCharCode(0x2022)} Goverment Technical field Osogbo (Oct 2013).
-${String.fromCharCode(0x2022)} Olufemi Kayode Stadium Ado-Ekiti (Oct 2014).
+${String.fromCharCode(0x2022)} Olufemi Kayode Stadium Ado-Ekiti (Oct 2014). 
 ${String.fromCharCode(0x2022)} Abeokuta sports Club Field (Oct 2015).
 ${String.fromCharCode(0x2022)} Democracy Park Akure (Feb 2017)
 ${String.fromCharCode(0x2022)} Liberty Stadium Ibadan (Mar 2018).
 ${String.fromCharCode(0x2022)} Trans Amusement Park Ibadan (Mar 2019).
 ${String.fromCharCode(0x2022)} Adamasingba Stadium Ibadan (Mar 2020).
 ${String.fromCharCode(0x2022)} Ibadan Recreation Club Field (Mar 2021).
+${String.fromCharCode(0x2022)} University of Ibadan SUB Soccer Field (Mar 2022).
 
 We have held Campus Storms at over 15 campuses since inception and recently:
 
@@ -53,10 +56,20 @@ The platform of discipleship is for those who are willing to:
 * experience the joy of true fellowship.
 * grow into the likeness of Christ (2Cor2:16).
 * fulfill their true destiny in Christ (Eph2:10).
-* rise above the statusquo(John 12:32).
+* rise above the status quo (John 12:32).
 
 Are you ready to go beyond the ordinary?
 
 I dare you to join this community of believers as we daily learn to follow Christ and draw others to do the same.
+''';
+
+  static const String member = '''
+Do you want to go beyond the Events?
+
+Do you want more than just volunteering for our major programmes?
+
+Would you like to be a part of this ministry and mandate?
+
+Then, apply to be a Member of the MASS Movement!
 ''';
 }

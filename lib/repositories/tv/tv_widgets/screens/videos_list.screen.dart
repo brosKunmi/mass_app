@@ -18,8 +18,8 @@ class VideosListScreen extends StatelessWidget {
       appBar: utilityAppBar(title.bigBold),
       body: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisSpacing: 4.0,
-          mainAxisSpacing: 4.0,
+          crossAxisSpacing: 8.0,
+          mainAxisSpacing: 12.0,
           crossAxisCount: 2,
         ),
         itemBuilder: (con, i) {

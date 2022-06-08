@@ -7,10 +7,12 @@ import 'package:mass_app/repositories/auth/auth_screens/screens/profile_screen.d
 import 'package:mass_app/repositories/home/screens/drawer_screens/support_us.dart';
 
 import 'package:mass_app/repositories/home/screens/home_blocs.dart';
+import 'package:mass_app/repositories/notifications/service/n0ts_services.dart';
 import 'package:mass_app/repositories/tv/tv_widgets/screens/tv_screen.dart';
 
 import 'package:mass_app/utilities/colors%20and%20doubles/colors.dart';
 import 'package:mass_app/utilities/colors%20and%20doubles/doubles.dart';
+import 'package:mass_app/utilities/extensions/string_extentions.dart';
 
 import '../home_widgets.dart/home_utilities_barrel.dart';
 
@@ -24,6 +26,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  @override
+  initState() {
+    super.initState();
+    NotificationServices.setupInteractedMessage(context);
+  }
+
   int _index = 0;
   @override
   Widget build(BuildContext context) {
@@ -70,15 +78,31 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: primaryColor,
         child: const DrawerWidgets(),
       ),
-      floatingActionButton: FloatingActionButton.small(
-        tooltip: 'Support us',
-        backgroundColor: Colors.orangeAccent,
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (c) => const SupportUsPage()),
-          );
-        },
-        child: const FaIcon(FontAwesomeIcons.dollarSign),
+      floatingActionButton: Container(
+        padding: const EdgeInsets.all(8.0),
+        height: 60,
+        width: 120,
+        child: FloatingActionButton(
+          tooltip: 'Support us',
+          backgroundColor: Colors.orangeAccent,
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (c) => const SupportUsPage()),
+            );
+          },
+          shape: RoundedRectangleBorder(borderRadius: buttonBR),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const FaIcon(
+                FontAwesomeIcons.dollarSign,
+                size: 16,
+              ),
+              const SizedBox(width: 2),
+              'DONATE'.vidText,
+            ],
+          ),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       bottomNavigationBar: ConvexAppBar(

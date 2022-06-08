@@ -28,13 +28,16 @@ class AuthLoginCubit extends Cubit<AuthLoginState> {
     }
   }
 
-  void signUpUser(String username, String email, String password,
-      String phoneNumber) async {
+  void signUpUser(
+      {required String username,
+      required String email,
+      required String password,
+      String? phoneNumber}) async {
     emit(state.copyWith(status: LoginStatus.loading));
     try {
       await Future.delayed(const Duration(seconds: 2), () async {
         var _uId = await _authUserRepo.registerUser(
-            email, password, username, phoneNumber);
+            email, password, username, phoneNumber ?? '');
         emit(state.copyWith(status: LoginStatus.success, userId: _uId));
       });
     } on FirebaseException catch (e) {
@@ -95,6 +98,21 @@ class AuthLoginCubit extends Cubit<AuthLoginState> {
     try {
       await Future.delayed(const Duration(seconds: 2), () async {
         var massian = await _authUserRepo.beDisc(userId);
+        emit(state.copyWith(status: LoginStatus.userLoaded, massian: massian));
+      });
+    } on FirebaseException catch (e) {
+      emit(
+        state.copyWith(
+            status: LoginStatus.error, exception: e.message.toString()),
+      );
+    }
+  }
+
+  void becomeMember(String userId) async {
+    emit(state.copyWith(status: LoginStatus.loading));
+    try {
+      await Future.delayed(const Duration(seconds: 2), () async {
+        var massian = await _authUserRepo.beMem(userId);
         emit(state.copyWith(status: LoginStatus.userLoaded, massian: massian));
       });
     } on FirebaseException catch (e) {

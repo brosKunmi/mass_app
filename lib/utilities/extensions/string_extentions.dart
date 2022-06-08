@@ -61,6 +61,7 @@ extension TextStrings on String {
   Text get profileBold => Text(
         this,
         textAlign: TextAlign.center,
+        overflow: TextOverflow.clip,
         style: GoogleFonts.montserrat(
           fontSize: 16,
           fontWeight: FontWeight.w400,
@@ -133,6 +134,16 @@ extension TextStrings on String {
   Text get artBold => Text(
         this,
         textAlign: TextAlign.center,
+        style: GoogleFonts.montserrat(
+          fontSize: 18,
+          fontWeight: FontWeight.w400,
+          color: primaryColor,
+        ),
+      );
+
+  Text get artBold2 => Text(
+        this,
+        textAlign: TextAlign.start,
         style: GoogleFonts.montserrat(
           fontSize: 18,
           fontWeight: FontWeight.w400,

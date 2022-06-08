@@ -3,15 +3,17 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AuthTextField extends StatelessWidget {
   final TextInputType keyboardType;
-  final String label;
+  final String? label;
   final Function(String?) onSubmitted;
   final String? initial;
+  final String? hint;
 
   const AuthTextField(
       {Key? key,
       required this.keyboardType,
       required this.onSubmitted,
-      required this.label,
+      this.label,
+      this.hint,
       this.initial})
       : super(key: key);
 
@@ -28,9 +30,14 @@ class AuthTextField extends StatelessWidget {
         onSaved: onSubmitted,
         decoration: InputDecoration(
           labelText: label,
-          labelStyle: GoogleFonts.montserrat(
+          hintText: hint ?? '',
+          hintStyle: GoogleFonts.montserrat(
             fontSize: 14,
             color: Colors.black,
+          ),
+          labelStyle: GoogleFonts.montserrat(
+            fontSize: 14,
+            color: Colors.black87,
           ),
         ),
       ),

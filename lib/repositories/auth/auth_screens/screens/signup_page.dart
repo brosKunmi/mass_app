@@ -60,16 +60,18 @@ class SignUpScreen extends StatelessWidget {
                               label: 'Name',
                               onSubmitted: (a) => _name = a!),
                           AuthTextField(
-                              keyboardType: TextInputType.emailAddress,
-                              label: 'Email Address',
-                              onSubmitted: (a) => _email = a!),
+                            keyboardType: TextInputType.emailAddress,
+                            label: 'Email Address',
+                            onSubmitted: (a) => _email = a!.trim(),
+                          ),
                           AuthTextField(
                               keyboardType: TextInputType.phone,
-                              label: 'Phone Number',
+                              hint: 'Phone Number (Optional)',
                               onSubmitted: (a) => _number = a!),
                           AuthPasswordField(
-                              label: 'Password',
-                              onSubmitted: (a) => _password = a!),
+                            label: 'Password',
+                            onSubmitted: (a) => _password = a!.trim(),
+                          ),
                           AuthPasswordField(
                             label: 'Confirm Password',
                             onSubmitted: (pass) {},
@@ -138,7 +140,11 @@ class SignUpScreen extends StatelessWidget {
                               _formKey.currentState!.save();
                               FocusScope.of(context).unfocus();
                               context.read<AuthLoginCubit>().signUpUser(
-                                  _name, _email, _password, _number);
+                                    username: _name,
+                                    email: _email,
+                                    password: _password,
+                                    phoneNumber: _number,
+                                  );
                             },
                           ),
                         );
